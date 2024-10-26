@@ -10,6 +10,8 @@ from collections import defaultdict
 locale.setlocale(locale.LC_TIME, 'da_DK')
 
 
+
+
 class Plot:
     def __init__(self, data_series: list[tuple], title: str, destination: Path):
         data_series.sort()
@@ -35,8 +37,11 @@ class Plot:
         daily_means = [(datetime.combine(day, datetime.min.time()) + timedelta(hours=12), np.mean(values))
                        for day, values in daily_values.items()]
 
+        unique_dates = sorted(set(time.date() for time in times))
+
         daily_times, daily_mean_values = zip(*daily_means)
-        plt.scatter(daily_times, daily_mean_values, color='purple', marker='D', s=20, label='Daily Mean')
+        plt.scatter(daily_times, daily_mean_values, color='purple', marker='D', s=20,
+                    label=f'Daily Mean ({", ".join([f"{val:.0f}" for val in daily_mean_values])})')
 
         plt.title(f'{title} as function of time', pad=20)
         plt.xlabel('Time')
@@ -46,12 +51,14 @@ class Plot:
         plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
         plt.xticks(times, rotation=45, ha="right", fontsize=3)
         plt.gcf().autofmt_xdate()
-        plt.legend(fontsize=8)
+        plt.legend(fontsize=8, loc='upper left', bbox_to_anchor=(1, 1))
 
-        plt.subplots_adjust(top=0.85)
+        plt.subplots_adjust(right=0.75, top=0.85)
+
+        current_locale = locale.getlocale(locale.LC_TIME)
+        locale.setlocale(locale.LC_TIME, 'en_US')
 
         # Add shifting color background per day and weekday label at 12:00
-        unique_dates = sorted(set(time.date() for time in times))
         y_min, y_max = plt.ylim()
         for i, day in enumerate(unique_dates):
             color = "lightgrey" if i % 2 == 0 else "whitesmoke"
