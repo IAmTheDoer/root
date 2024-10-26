@@ -22,7 +22,7 @@ class Plot:
 
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%d-%m %H:%M"))
         plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
-        plt.xticks(times, rotation=45, ha="right", fontsize=4)
+        plt.xticks(times, rotation=45, ha="right", fontsize=3)
         plt.gcf().autofmt_xdate()
         plt.legend()
 
