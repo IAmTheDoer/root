@@ -4,6 +4,9 @@ import matplotlib.dates as mdates
 from datetime import datetime, timedelta
 from matplotlib.patches import Rectangle
 import numpy as np
+import locale
+
+locale.setlocale(locale.LC_TIME, 'da_DK')
 
 
 class Plot:
@@ -16,7 +19,9 @@ class Plot:
         plt.figure(figsize=(10, 6))
         plt.plot(times, diastolic_values, marker='o', linestyle='-', linewidth=.5, markersize=2)
         plt.axhline(y=mean_value, color='r', linestyle='--', linewidth=1, label=f'Mean: {mean_value:.2f}')
-        plt.title(f'{title} as function of time')
+
+        plt.title(f'{title} as function of time', pad=20)
+
         plt.xlabel('Time')
         plt.ylabel(title)
 
@@ -26,7 +31,9 @@ class Plot:
         plt.gcf().autofmt_xdate()
         plt.legend()
 
-        # Add shifting color background per day
+        plt.subplots_adjust(top=0.85)
+
+        # Add shifting color background per day and weekday label at 12:00
         unique_dates = sorted(set(time.date() for time in times))
         y_min, y_max = plt.ylim()
         for i, day in enumerate(unique_dates):
@@ -41,6 +48,20 @@ class Plot:
                     edgecolor="none",
                     zorder=0
                 )
+            )
+
+            # Add weekday name at 12:00 of each day's background
+            midday = datetime.combine(day, datetime.min.time()) + timedelta(hours=12)
+            weekday_name = day.strftime("%A")  # Ugedag på dansk
+            plt.text(
+                mdates.date2num(midday),
+                y_max,
+                weekday_name,
+                ha='center',
+                va='bottom',
+                fontsize=8,
+                fontweight='bold',
+                color='black'
             )
 
         destination.mkdir(exist_ok=True, parents=True)
