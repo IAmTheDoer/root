@@ -5,6 +5,8 @@ numpy
 pyyaml
 python-dateutil
 
+matplotlib
+
 types-python-dateutil
 pytest
 pytest-xdist

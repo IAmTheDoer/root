@@ -20,5 +20,5 @@ data_format:
 
         "22:40":
             type: "blood-pressure"
-            data: [104	81	76]
+            data: [104, 81, 76]
             note: ""

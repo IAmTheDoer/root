@@ -6,10 +6,9 @@ class Loader:
     def __init__(self, data_file: Path):
         self._data_file = data_file
         if not data_file.exists():
-            print(f'{data_file} not found. Creating an empty file.')
-            data_file.touch()
+            print(f'{data_file} not found in this working directory("{Path.cwd()}"). Creating an empty file.')
+            #data_file.touch()
             self._data = {}
-            return
         else:
             with open(data_file, 'r') as file:
                 self._data = yaml.safe_load(file)
