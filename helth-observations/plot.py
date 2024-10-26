@@ -14,7 +14,7 @@ class Plot:
         mean_value = np.mean(diastolic_values)
 
         plt.figure(figsize=(10, 6))
-        plt.plot(times, diastolic_values, marker='o', linestyle='-', linewidth=.5, markersize=3)
+        plt.plot(times, diastolic_values, marker='o', linestyle='-', linewidth=.5, markersize=2)
         plt.axhline(y=mean_value, color='r', linestyle='--', linewidth=1, label=f'Mean: {mean_value:.2f}')
         plt.title(f'{title} as function of time')
         plt.xlabel('Time')
@@ -22,7 +22,7 @@ class Plot:
 
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%d-%m %H:%M"))
         plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=1))
-        plt.xticks(rotation=45, ha="right")
+        plt.xticks(times, rotation=45, ha="right", fontsize=2)
         plt.gcf().autofmt_xdate()
 
         # Add shifting color background per day
