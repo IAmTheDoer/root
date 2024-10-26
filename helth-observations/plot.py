@@ -53,9 +53,10 @@ class Plot:
         plt.gcf().autofmt_xdate()
         plt.legend(fontsize=6, loc='upper left', bbox_to_anchor=(1, 1))
 
-        plt.subplots_adjust(right=0.75, top=0.85)
+        # Flyt legend under grafen
+        plt.legend(fontsize=6, loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=3)
+        plt.subplots_adjust(bottom=0.20, top=0.90)
 
-        current_locale = locale.getlocale(locale.LC_TIME)
         locale.setlocale(locale.LC_TIME, 'en_US')
 
         # Add shifting color background per day and weekday label at 12:00
