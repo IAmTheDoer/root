@@ -15,13 +15,18 @@ class Plot:
         times, diastolic_values = zip(*data_series)
 
         mean_value = np.mean(diastolic_values)
+        min_value = np.min(diastolic_values)
+        max_value = np.max(diastolic_values)
 
         plt.figure(figsize=(10, 6))
         plt.plot(times, diastolic_values, marker='o', linestyle='-', linewidth=.5, markersize=2)
-        plt.axhline(y=mean_value, color='r', linestyle='--', linewidth=1, label=f'Mean: {mean_value:.2f}')
+
+        # Plot mean, min, and max lines with labels
+        plt.axhline(y=mean_value, color='r', linestyle='--', linewidth=.5, label=f'Mean: {mean_value:.0f}')
+        plt.axhline(y=min_value, color='blue', linestyle=':', linewidth=.5, label=f'Min: {min_value:.0f}')
+        plt.axhline(y=max_value, color='green', linestyle=':', linewidth=.5, label=f'Max: {max_value:.0f}')
 
         plt.title(f'{title} as function of time', pad=20)
-
         plt.xlabel('Time')
         plt.ylabel(title)
 
