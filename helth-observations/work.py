@@ -28,4 +28,4 @@ for year, dates in data.items():
                 diastolic_value = details['diastolic']
                 diastolic_series.append((timestamp, diastolic_value))
 
-plot = Plot(diastolic_series, 'diastolic', plot_root)
+plot = Plot(diastolic_series, 'diastolic pressure', x_type='time', y_type='mmHg', destination=plot_root)

@@ -13,7 +13,7 @@ locale.setlocale(locale.LC_TIME, 'da_DK')
 
 
 class Plot:
-    def __init__(self, data_series: list[tuple], title: str, destination: Path):
+    def __init__(self, data_series: list[tuple], title: str, x_type: str, y_type: str, destination: Path):
         data_series.sort()
         times, diastolic_values = zip(*data_series)
 
@@ -44,14 +44,14 @@ class Plot:
                     label=f'Daily Mean ({", ".join([f"{val:.0f}" for val in daily_mean_values])})')
 
         plt.title(f'{title} as function of time', pad=20)
-        plt.xlabel('Time')
-        plt.ylabel(title)
+        plt.xlabel(x_type)
+        plt.ylabel(y_type)
 
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%d-%m %H:%M"))
         plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
-        plt.xticks(times, rotation=45, ha="right", fontsize=3)
+        plt.xticks(times, rotation=45, ha="right", fontsize=6)
         plt.gcf().autofmt_xdate()
-        plt.legend(fontsize=8, loc='upper left', bbox_to_anchor=(1, 1))
+        plt.legend(fontsize=6, loc='upper left', bbox_to_anchor=(1, 1))
 
         plt.subplots_adjust(right=0.75, top=0.85)
 
