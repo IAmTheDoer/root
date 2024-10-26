@@ -5,7 +5,7 @@ from data_loader import Loader
 from plot import Plot
 
 data_root = Path('./data')
-plot_root = Path('plot-output')
+plot_root = Path('[plot-output]')
 
 
 data_file = data_root / 'observations.yaml'

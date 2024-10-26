@@ -1,5 +1,9 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from datetime import datetime
+from matplotlib.patches import Rectangle
+import numpy as np
 
 
 class Plot:
@@ -7,17 +11,36 @@ class Plot:
         data_series.sort()
         times, diastolic_values = zip(*data_series)
 
-        # Plot diastolic værdier mod tidspunkter
-        plt.figure(figsize=(10, 6))
-        plt.plot(times, diastolic_values, marker='o', linestyle='-')
-        plt.title(f'{title} as function of time')
-        plt.xlabel('time')
-        plt.ylabel(title)
-        plt.xticks(rotation=45, ha="right")
-        plt.gcf().autofmt_xdate()  # Shortens date format for better readability
+        mean_value = np.mean(diastolic_values)
 
-        # Gem plot som en fil
-        file_path = destination / f'{destination}.png'
+        plt.figure(figsize=(10, 6))
+        plt.plot(times, diastolic_values, marker='o', linestyle='-', linewidth=.5, markersize=3)
+        plt.axhline(y=mean_value, color='r', linestyle='--', linewidth=1, label=f'Mean: {mean_value:.2f}')
+        plt.title(f'{title} as function of time')
+        plt.xlabel('Time')
+        plt.ylabel(title)
+
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%d-%m %H:%M"))
+        plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=1))
+        plt.xticks(rotation=45, ha="right")
+        plt.gcf().autofmt_xdate()
+
+        # Add shifting color background per day
+        unique_dates = sorted(set(time.date() for time in times))
+        for i, day in enumerate(unique_dates):
+            color = "lightgrey" if i % 2 == 0 else "whitesmoke"
+            plt.gca().add_patch(
+                Rectangle(
+                    (mdates.date2num(datetime.combine(day, datetime.min.time())), plt.ylim()[0]),
+                    1,
+                    plt.ylim()[1] - plt.ylim()[0],
+                    facecolor=color,
+                    edgecolor="none",
+                    zorder=0
+                )
+            )
+
         destination.mkdir(exist_ok=True, parents=True)
-        plt.savefig(file_path, format='png')
+        file_path = destination / f'{title}.png'
+        plt.savefig(file_path, format='png', dpi=300)
         plt.close()
