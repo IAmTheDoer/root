@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from matplotlib.patches import Rectangle
 import numpy as np
 import locale
+from collections import defaultdict
 
 locale.setlocale(locale.LC_TIME, 'da_DK')
 
@@ -26,6 +27,17 @@ class Plot:
         plt.axhline(y=min_value, color='blue', linestyle=':', linewidth=.5, label=f'Min: {min_value:.0f}')
         plt.axhline(y=max_value, color='green', linestyle=':', linewidth=.5, label=f'Max: {max_value:.0f}')
 
+        # Calculate and plot daily means
+        daily_values = defaultdict(list)
+        for time, value in zip(times, diastolic_values):
+            daily_values[time.date()].append(value)
+
+        daily_means = [(datetime.combine(day, datetime.min.time()) + timedelta(hours=12), np.mean(values))
+                       for day, values in daily_values.items()]
+
+        daily_times, daily_mean_values = zip(*daily_means)
+        plt.scatter(daily_times, daily_mean_values, color='purple', marker='D', s=20, label='Daily Mean')
+
         plt.title(f'{title} as function of time', pad=20)
         plt.xlabel('Time')
         plt.ylabel(title)
@@ -34,7 +46,7 @@ class Plot:
         plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
         plt.xticks(times, rotation=45, ha="right", fontsize=3)
         plt.gcf().autofmt_xdate()
-        plt.legend()
+        plt.legend(fontsize=8)
 
         plt.subplots_adjust(top=0.85)
 
