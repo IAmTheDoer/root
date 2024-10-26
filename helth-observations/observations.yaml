@@ -1,0 +1,24 @@
+data_format:
+    "blood-pressure": "systolic, diastolic, heart_rate"
+
+2024:
+    "22-10":
+        "19:00":
+            type: label
+            exercise: "badminton 1 hour"
+            note: "After 45 minutes, near-fainting sensation, urge to defecate, inability to perform"
+
+        "20:45":
+            type: "blood-pressure"
+            data: [95, 72, 98]
+            note: ""
+
+        "21:15":
+            type: "blood-pressure"
+            data: [97, 73, 99]
+            note: ""
+
+        "22:40":
+            type: "blood-pressure"
+            data: [104	81	76]
+            note: ""

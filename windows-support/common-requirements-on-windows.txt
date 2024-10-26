@@ -1,0 +1,17 @@
+ansi
+detect
+# nptyping
+numpy
+pyyaml
+python-dateutil
+
+types-python-dateutil
+pytest
+pytest-xdist
+pytest-cov
+pytest-repeat
+pytest-pylint
+pytest-mypy
+pytest-ordering
+pytest-check
+pytest-html
