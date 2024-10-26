@@ -1,7 +1,7 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from datetime import datetime
+from datetime import datetime, timedelta
 from matplotlib.patches import Rectangle
 import numpy as np
 
@@ -21,19 +21,22 @@ class Plot:
         plt.ylabel(title)
 
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%d-%m %H:%M"))
-        plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=1))
-        plt.xticks(times, rotation=45, ha="right", fontsize=2)
+        plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
+        plt.xticks(times, rotation=45, ha="right", fontsize=4)
         plt.gcf().autofmt_xdate()
+        plt.legend()
 
         # Add shifting color background per day
         unique_dates = sorted(set(time.date() for time in times))
+        y_min, y_max = plt.ylim()
         for i, day in enumerate(unique_dates):
             color = "lightgrey" if i % 2 == 0 else "whitesmoke"
             plt.gca().add_patch(
                 Rectangle(
-                    (mdates.date2num(datetime.combine(day, datetime.min.time())), plt.ylim()[0]),
-                    1,
-                    plt.ylim()[1] - plt.ylim()[0],
+                    (mdates.date2num(datetime.combine(day, datetime.min.time())), y_min),
+                    mdates.date2num(datetime.combine(day + timedelta(days=1), datetime.min.time())) -
+                    mdates.date2num(datetime.combine(day, datetime.min.time())),
+                    y_max - y_min,
                     facecolor=color,
                     edgecolor="none",
                     zorder=0
