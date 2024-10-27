@@ -1,11 +1,12 @@
 data_format:
-    "label": "en event to note"
+    "label": "an event to note"
+    "exercise": "exercise"
     "blood-pressure": "systolic, diastolic, heart_rate"
 
 2024:
     "22-10":
         "19:00":
-            type: label
+            type: exercise
             exercise: "badminton 1 hour"
             note: "After 45 minutes, near-fainting sensation, urge to defecate, inability to perform"
         "20:45":
@@ -103,8 +104,8 @@ data_format:
             data: [111, 81, 57]
             note: ""
         "19:00":
-            type: "label"
-            exercise: "badminton 1½ hour"
+            type: exercise
+            exercise: "badminton 1,5 hour"
             note: "After 45 minutes, near-fainting sensation, urge to defecate, inability to perform"
         "21:08":
             type: "blood-pressure"
@@ -183,4 +184,17 @@ data_format:
         "21:32":
             type: "blood-pressure"
             data: [113, 75, 68]
+            note: ""
+    "27-10":
+        "1:44":
+            type: "blood-pressure"
+            data: [102, 73, 62]
+            note: ""
+        "8:10":
+            type: "blood-pressure"
+            data: [113, 81, 60]
+            note: "before morning medication"
+        "9:52":
+            type: "blood-pressure"
+            data: [113, 78, 54]
             note: ""

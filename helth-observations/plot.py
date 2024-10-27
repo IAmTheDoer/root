@@ -15,14 +15,14 @@ locale.setlocale(locale.LC_TIME, 'da_DK')
 class Plot:
     def __init__(self, data_series: list[tuple], title: str, x_type: str, y_type: str, destination: Path):
         data_series.sort()
-        times, diastolic_values = zip(*data_series)
+        times, data_entries = zip(*data_series)
 
-        mean_value = np.mean(diastolic_values)
-        min_value = np.min(diastolic_values)
-        max_value = np.max(diastolic_values)
+        mean_value = np.mean(data_entries)
+        min_value = np.min(data_entries)
+        max_value = np.max(data_entries)
 
         plt.figure(figsize=(10, 6))
-        plt.plot(times, diastolic_values, marker='o', linestyle='-', linewidth=.5, markersize=2)
+        plt.plot(times, data_entries, marker='o', linestyle='-', linewidth=.5, markersize=2)
 
         # Plot mean, min, and max lines with labels
         plt.axhline(y=mean_value, color='r', linestyle='--', linewidth=.5, label=f'Mean: {mean_value:.0f}')
@@ -31,7 +31,7 @@ class Plot:
 
         # Calculate and plot daily means
         daily_values = defaultdict(list)
-        for time, value in zip(times, diastolic_values):
+        for time, value in zip(times, data_entries):
             daily_values[time.date()].append(value)
 
         daily_means = [(datetime.combine(day, datetime.min.time()) + timedelta(hours=12), np.mean(values))
@@ -43,7 +43,7 @@ class Plot:
         plt.scatter(daily_times, daily_mean_values, color='purple', marker='D', s=20,
                     label=f'Daily Mean ({", ".join([f"{val:.0f}" for val in daily_mean_values])})')
 
-        plt.title(f'{title} as function of time', pad=20)
+        plt.title(title, pad=20)
         plt.xlabel(x_type)
         plt.ylabel(y_type)
 
@@ -77,7 +77,7 @@ class Plot:
 
             # Add weekday name at 12:00 of each day's background
             midday = datetime.combine(day, datetime.min.time()) + timedelta(hours=12)
-            weekday_name = day.strftime("%A")  # Ugedag på dansk
+            weekday_name = day.strftime("%A")
             plt.text(
                 mdates.date2num(midday),
                 y_max,
