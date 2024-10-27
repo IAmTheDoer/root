@@ -45,9 +45,11 @@ def create_plots(data, scope: str):
                         exercise = details['exercise']
                         exercise_series.append((timestamp, exercise))
 
-    Plot(diastolic_series, f'diastolic pressure {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series)
-    Plot(systolic_series, f'systolic pressure {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series)
-    Plot(heart_rate_series, f'heart rate {scope}', x_type='time', y_type='/min', destination=plot_root, events=exercise_series)
+    Plot(data_series=[systolic_series], title=f'systolic, {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series, series_labels=['systolic'])
+    Plot(data_series=[diastolic_series], title=f'diastolic, {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series, series_labels=['diastolic'])
+    Plot(data_series=[heart_rate_series], title=f'heart rate, {scope}', x_type='time', y_type='/min', destination=plot_root, events=exercise_series, series_labels=['heart rate'])
+    Plot(data_series=[systolic_series, diastolic_series], title=f'systolic-diastolic, {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series, series_labels=['systolic', 'diastolic'])
+    Plot(data_series=[systolic_series, diastolic_series, heart_rate_series], title=f'systolic-diastolic-heart rate, {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series, series_labels=['systolic', 'diastolic', 'heart rate'])
 
 
 def create_data_report(data, scope: str):
