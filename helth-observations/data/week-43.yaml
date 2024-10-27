@@ -201,4 +201,28 @@ data_format:
         "12:31":
             type: "blood-pressure"
             data: [109, 80, 54]
+            note: "before midday medication"
+        "15:24":
+            type: "blood-pressure"
+            data: [95, 68, 65]
+            note: ""
+        "17:49":
+            type: "blood-pressure"
+            data: [109, 75, 57]
+            note: ""
+        "18:27":
+            type: exercise
+            exercise: "dumbbells - 8 ton - 1 hour"
+            note: ""
+        "19:49":
+            type: "blood-pressure"
+            data: [108, 73, 74]
+            note: ""
+        "22:13":
+            type: "blood-pressure"
+            data: [101, 70, 69]
+            note: ""
+        "23:47":
+            type: "blood-pressure"
+            data: [112, 75, 65]
             note: ""
