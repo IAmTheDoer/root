@@ -45,9 +45,9 @@ def create_plots(data, scope: str):
                         exercise = details['exercise']
                         exercise_series.append((timestamp, exercise))
 
-    Plot(diastolic_series, f'diastolic pressure {scope}', x_type='time', y_type='mmHg', destination=plot_root)
-    Plot(systolic_series, f'systolic pressure {scope}', x_type='time', y_type='mmHg', destination=plot_root)
-    Plot(heart_rate_series, f'heart rate {scope}', x_type='time', y_type='/min', destination=plot_root)
+    Plot(diastolic_series, f'diastolic pressure {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series)
+    Plot(systolic_series, f'systolic pressure {scope}', x_type='time', y_type='mmHg', destination=plot_root, events=exercise_series)
+    Plot(heart_rate_series, f'heart rate {scope}', x_type='time', y_type='/min', destination=plot_root, events=exercise_series)
 
 
 def create_data_report(data, scope: str):

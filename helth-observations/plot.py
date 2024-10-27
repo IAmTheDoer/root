@@ -10,10 +10,8 @@ from collections import defaultdict
 locale.setlocale(locale.LC_TIME, 'da_DK')
 
 
-
-
 class Plot:
-    def __init__(self, data_series: list[tuple], title: str, x_type: str, y_type: str, destination: Path):
+    def __init__(self, data_series: list[tuple], title: str, x_type: str, y_type: str, destination: Path, events: list[tuple] = None):
         data_series.sort()
         times, data_entries = zip(*data_series)
 
@@ -51,13 +49,10 @@ class Plot:
         plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=2))
         plt.xticks(times, rotation=45, ha="right", fontsize=6)
         plt.gcf().autofmt_xdate()
-        plt.legend(fontsize=6, loc='upper left', bbox_to_anchor=(1, 1))
 
-        # Flyt legend under grafen
+        # Place legend below the plot
         plt.legend(fontsize=6, loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=3)
-        plt.subplots_adjust(bottom=0.20, top=0.90)
-
-        locale.setlocale(locale.LC_TIME, 'en_US')
+        plt.subplots_adjust(bottom=0.25, top=0.90)
 
         # Add shifting color background per day and weekday label at 12:00
         y_min, y_max = plt.ylim()
@@ -88,6 +83,12 @@ class Plot:
                 fontweight='bold',
                 color='black'
             )
+
+        # Plot events if provided
+        if events:
+            for event_time, description in events:
+                plt.axvline(x=event_time, color='orange', linestyle='--', linewidth=0.8)
+                plt.text(event_time, y_min + 1, description, rotation=90, va='bottom', ha='right', fontsize=6, color='orange')
 
         destination.mkdir(exist_ok=True, parents=True)
         file_path = destination / f'{title}.png'

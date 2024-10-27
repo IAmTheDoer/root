@@ -198,3 +198,7 @@ data_format:
             type: "blood-pressure"
             data: [113, 78, 54]
             note: ""
+        "12:31":
+            type: "blood-pressure"
+            data: [109, 80, 54]
+            note: ""
