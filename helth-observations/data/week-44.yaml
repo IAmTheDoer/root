@@ -78,12 +78,16 @@ data_format:
         "13:54":
             type: "blood-pressure"
             data: [[108, 109, 110], [70, 69, 74], [66, 64, 65]]
-            note: ""
+            note: "dizzy"
         "15:20":
             type: "blood-pressure"
             data: [[107, 109], [70, 73], [65, 63]]
-            note: ""
+            note: "dizzy"
         "18:45":
             type: "blood-pressure"
             data: [[117, 116, 117], [78, 77, 80], [58, 58, 59]]
-            note: ""
+            note: "dizzy"
+        "22:09":
+            type: "blood-pressure"
+            data: [[113, 113], [73, 76], [73, 73]]
+            note: "dizzy"
