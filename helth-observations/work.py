@@ -9,14 +9,9 @@ from report import Report
 data_root = Path('./data')
 plot_root = Path('[plot-output]')
 
-the_data_file = 'week-43'
 
-data_file = data_root / f'{the_data_file}.yaml'
-loader = Loader(data_file=data_file)
-
-data = loader.data()
-
-pprint.pprint(data)
+data_source_files = ('week-43', 'week-44')
+# data_source_files = ('week-test', )
 
 
 def create_plots(data, scope: str):
@@ -69,5 +64,14 @@ def create_data_report(data, scope: str):
     Report(rows, f'data report {the_data_file}', destination=plot_root)
 
 
-create_plots(data, the_data_file)
-create_data_report(data, the_data_file)
+for the_data_file in data_source_files:
+    print(f'Working with "{the_data_file}" ...')
+    data_file = data_root / f'{the_data_file}.yaml'
+    loader = Loader(data_file=data_file)
+    data = loader.data()
+
+    # pprint.pprint(data)
+
+    create_plots(data, the_data_file)
+    create_data_report(data, the_data_file)
+    print('... Done!\n')

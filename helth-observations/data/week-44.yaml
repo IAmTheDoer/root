@@ -1,0 +1,89 @@
+data_format:
+    "label": "an event to note"
+    "exercise": "exercise"
+    "blood-pressure": "systolic, diastolic, heart_rate"
+
+2024:
+    "28-10":
+        "8:42":
+            type: "blood-pressure"
+            data: [117, 82, 53]
+            note: "before morning medication"
+        "12:04":
+            type: "blood-pressure"
+            data: [118, 81, 53]
+            note: "before midday medication"
+        "13:55":
+            type: "blood-pressure"
+            data: [105, 65, 64]
+            note: ""
+        "15:12":
+            type: "blood-pressure"
+            data: [105, 69, 62]
+            note: ""
+        "17:14":
+            type: "blood-pressure"
+            data: [109, 74, 54]
+            note: ""
+        "19:24":
+            type: "blood-pressure"
+            data: [113, 78, 50]
+            note: ""
+        "21:55":
+            type: "blood-pressure"
+            data: [100, 66, 65]
+            note: ""
+    "29-10":
+        "8:15":
+            type: "blood-pressure"
+            data: [116, 80, 50]
+            note: "before morning medication"
+        "15:16":
+            type: "blood-pressure"
+            data: [113, 71, 59]
+            note: ""
+        "16:36":
+            type: "blood-pressure"
+            data: [110, 73, 60]
+            note: ""
+        "18:29":
+            type: "blood-pressure"
+            data: [116, 76, 57]
+            note: ""
+        "19:00":
+            type: exercise
+            exercise: "badminton 1 hour"
+            note: ""
+        "21:53":
+            type: "blood-pressure"
+            data: [109, 75, 67]
+            note: ""
+    "30-10":
+        "00:59":
+            type: "blood-pressure"
+            data: [109, 71, 66]
+            note: ""
+        "9:23":
+            type: "blood-pressure"
+            data: [[120, 121, 121], [83, 85, 82], [56, 55, 56]]
+            note: "before morning medication"
+        "11:30":
+            type: "blood-pressure"
+            data: [[109, 114, 112], [78, 78, 71], [62, 61, 62]]
+            note: ""
+        "12:09":
+            type: "blood-pressure"
+            data: [[113, 114, 118], [79, 79, 79], [59, 59, 61]]
+            note: "before midday medication"
+        "13:54":
+            type: "blood-pressure"
+            data: [[108, 109, 110], [70, 69, 74], [66, 64, 65]]
+            note: ""
+        "15:20":
+            type: "blood-pressure"
+            data: [[107, 109], [70, 73], [65, 63]]
+            note: ""
+        "18:45":
+            type: "blood-pressure"
+            data: [[117, 116, 117], [78, 77, 80], [58, 58, 59]]
+            note: ""
