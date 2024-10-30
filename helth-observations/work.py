@@ -10,7 +10,8 @@ data_root = Path('./data')
 plot_root = Path('[plot-output]')
 
 
-data_source_files = ('week-43', 'week-44')
+#data_source_files = ('week-43', 'week-44')
+data_source_files = ('week-44', )
 # data_source_files = ('week-test', )
 
 
